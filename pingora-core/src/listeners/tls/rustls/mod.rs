@@ -21,6 +21,7 @@ use pingora_error::ErrorType::InternalError;
 use pingora_error::{Error, OrErr, Result};
 use pingora_rustls::load_certs_and_key_files;
 use pingora_rustls::ClientCertVerifier;
+use pingora_rustls::ResolvesServerCert;
 use pingora_rustls::ServerConfig;
 use pingora_rustls::{version, TlsAcceptor as RusTlsAcceptor};
 
@@ -32,6 +33,7 @@ pub struct TlsSettings {
     cert_path: String,
     key_path: String,
     client_cert_verifier: Option<Arc<dyn ClientCertVerifier>>,
+    cert_resolver: Option<Arc<dyn ResolvesServerCert>>,
 }
 
 pub struct Acceptor {
@@ -51,14 +53,6 @@ impl TlsSettings {
         // rustls 0.23+ requires an explicit CryptoProvider.
         pingora_rustls::install_default_crypto_provider();
 
-        let Ok(Some((certs, key))) = load_certs_and_key_files(&self.cert_path, &self.key_path)
-        else {
-            panic!(
-                "Failed to load provided certificates \"{}\" or key \"{}\".",
-                self.cert_path, self.key_path
-            )
-        };
-
         let builder =
             ServerConfig::builder_with_protocol_versions(&[&version::TLS12, &version::TLS13]);
         let builder = if let Some(verifier) = self.client_cert_verifier {
@@ -66,12 +60,24 @@ impl TlsSettings {
         } else {
             builder.with_no_client_auth()
         };
-        let mut config = builder
-            .with_single_cert(certs, key)
-            .explain_err(InternalError, |e| {
-                format!("Failed to create server listener config: {e}")
-            })
-            .unwrap();
+
+        let mut config = if let Some(resolver) = self.cert_resolver {
+            builder.with_cert_resolver(resolver)
+        } else {
+            let Ok(Some((certs, key))) = load_certs_and_key_files(&self.cert_path, &self.key_path)
+            else {
+                panic!(
+                    "Failed to load provided certificates \"{}\" or key \"{}\".",
+                    self.cert_path, self.key_path
+                )
+            };
+            builder
+                .with_single_cert(certs, key)
+                .explain_err(InternalError, |e| {
+                    format!("Failed to create server listener config: {e}")
+                })
+                .unwrap()
+        };
 
         if let Some(alpn_protocols) = self.alpn_protocols {
             config.alpn_protocols = alpn_protocols;
@@ -98,6 +104,14 @@ impl TlsSettings {
         self.client_cert_verifier = Some(verifier);
     }
 
+    /// Provide a dynamic certificate resolver for SNI-based cert selection.
+    ///
+    /// When set, `cert_path` and `key_path` are ignored and the resolver
+    /// is invoked per-handshake to select the certificate.
+    pub fn set_cert_resolver(&mut self, resolver: Arc<dyn ResolvesServerCert>) {
+        self.cert_resolver = Some(resolver);
+    }
+
     pub fn intermediate(cert_path: &str, key_path: &str) -> Result<Self>
     where
         Self: Sized,
@@ -107,6 +121,7 @@ impl TlsSettings {
             cert_path: cert_path.to_string(),
             key_path: key_path.to_string(),
             client_cert_verifier: None,
+            cert_resolver: None,
         })
     }
 
@@ -131,5 +146,39 @@ impl Acceptor {
         } else {
             handshake(self, stream).await
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustls::server::ClientHello;
+
+    #[derive(Debug)]
+    struct DummyResolver;
+
+    impl ResolvesServerCert for DummyResolver {
+        fn resolve(&self, _client_hello: ClientHello<'_>) -> Option<Arc<rustls::sign::CertifiedKey>> {
+            // Return None for the unit test — we only care that build() succeeds
+            // with a resolver installed.
+            None
+        }
+    }
+
+    #[test]
+    fn build_with_cert_resolver_skips_file_load() {
+        let mut settings = TlsSettings::intermediate("/nonexistent/cert.pem", "/nonexistent/key.pem").unwrap();
+        settings.set_cert_resolver(Arc::new(DummyResolver));
+        // Should not panic even though cert/key paths are bogus.
+        let _acceptor = settings.build();
+    }
+
+    #[test]
+    fn build_without_cert_resolver_loads_files() {
+        // This test is intentionally minimal: the existing Pingora test suite
+        // covers the happy path of intermediate() + build() with real files.
+        // We just verify the struct fields are wired correctly.
+        let settings = TlsSettings::intermediate("/nonexistent/cert.pem", "/nonexistent/key.pem").unwrap();
+        assert!(settings.cert_resolver.is_none());
     }
 }
