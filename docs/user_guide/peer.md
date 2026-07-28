@@ -1,3 +1,9 @@
+---
+title: "Peer: how to connect to upstream"
+description: "In the upstream_peer() phase the user should return a Peer object which defines how to connect to a certain upstream."
+updated_at: "2026-07-28"
+---
+
 # `Peer`: how to connect to upstream
 
 In the `upstream_peer()` phase the user should return a `Peer` object which defines how to connect to a certain upstream.

@@ -1,3 +1,8 @@
+---
+title: "Pingora Internals"
+updated_at: "2026-07-28"
+---
+
 # Pingora Internals
 
 (Special thanks to [James Munns](https://github.com/jamesmunns) for writing this section)

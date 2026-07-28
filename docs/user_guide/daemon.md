@@ -1,3 +1,9 @@
+---
+title: "Daemonization"
+description: "When a Pingora server is configured to run as a daemon, after its bootstrapping, it will move itself to the background and optionally change to run under the configured user and group."
+updated_at: "2026-07-28"
+---
+
 # Daemonization
 
 When a Pingora server is configured to run as a daemon, after its bootstrapping, it will move itself to the background and optionally change to run under the configured user and group. The `pid_file` option comes handy in this case for the user to track the PID of the daemon in the background.

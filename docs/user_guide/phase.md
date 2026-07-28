@@ -1,3 +1,9 @@
+---
+title: "Life of a request: pingora-proxy phases and filters"
+description: "The pingora-proxy HTTP proxy framework supports highly programmable proxy behaviors."
+updated_at: "2026-07-28"
+---
+
 # Life of a request: pingora-proxy phases and filters
 
 ## Intro

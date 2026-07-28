@@ -1,3 +1,9 @@
+---
+title: "Error logging"
+description: "Pingora libraries are built to expect issues like disconnects, timeouts and invalid inputs from the network."
+updated_at: "2026-07-28"
+---
+
 # Error logging
 
 Pingora libraries are built to expect issues like disconnects, timeouts and invalid inputs from the network. A common way to record these issues are to output them in error log (STDERR or log files).

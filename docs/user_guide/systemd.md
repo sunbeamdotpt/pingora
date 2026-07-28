@@ -1,3 +1,9 @@
+---
+title: "Systemd integration"
+description: "A Pingora server doesn't depend on systemd but it can easily be made into a systemd service."
+updated_at: "2026-07-28"
+---
+
 # Systemd integration
 
 A Pingora server doesn't depend on systemd but it can easily be made into a systemd service.

@@ -1,3 +1,9 @@
+---
+title: "RateLimiter quickstart"
+description: "Pingora provides a crate pingora-limits which provides a simple and easy to use rate limiter for your application."
+updated_at: "2026-07-28"
+---
+
 # **RateLimiter quickstart**
 Pingora provides a crate `pingora-limits` which provides a simple and easy to use rate limiter for your application. Below is an example of how you can use [`Rate`](https://docs.rs/pingora-limits/latest/pingora_limits/rate/struct.Rate.html) to create an application that uses multiple limiters to restrict the rate at which requests can be made on a per-app basis (determined by a request header).
 

@@ -1,3 +1,9 @@
+---
+title: "Sharing state across phases with CTX"
+description: "Define a CTX struct to share information and state across filters in different phases of a request."
+updated_at: "2026-07-28"
+---
+
 # Sharing state across phases with `CTX`
 
 ## Using `CTX`

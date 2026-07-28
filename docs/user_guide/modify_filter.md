@@ -1,3 +1,9 @@
+---
+title: "Examples: taking control of the request"
+description: "In this section we will go through how to route, modify or reject requests."
+updated_at: "2026-07-28"
+---
+
 # Examples: taking control of the request
 
 In this section we will go through how to route, modify or reject requests.

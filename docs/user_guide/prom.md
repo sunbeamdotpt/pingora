@@ -1,3 +1,9 @@
+---
+title: "Prometheus"
+description: "The pingora-prometheus crate provides a Prometheus HTTP metrics server for scraping."
+updated_at: "2026-07-28"
+---
+
 # Prometheus
 
 The [`pingora-prometheus`](https://docs.rs/pingora-prometheus) crate provides a

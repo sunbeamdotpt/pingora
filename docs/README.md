@@ -1,3 +1,9 @@
+---
+title: "Pingora User Manual"
+description: "User manual for Pingora covering the quick start and the user guide."
+updated_at: "2026-07-28"
+---
+
 # Pingora User Manual
 
 ## Quick Start

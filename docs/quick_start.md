@@ -1,3 +1,9 @@
+---
+title: "Quick Start: load balancer"
+description: "This quick start shows how to build a bare-bones load balancer using pingora and pingora-proxy."
+updated_at: "2026-07-28"
+---
+
 # Quick Start: load balancer
 
 ## Introduction

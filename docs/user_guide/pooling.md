@@ -1,3 +1,9 @@
+---
+title: "Connection pooling and reuse"
+description: "When the request to a Peer (upstream server) is finished, the connection to that peer is kept alive and added to a connection pool to be reused by subsequent requests."
+updated_at: "2026-07-28"
+---
+
 # Connection pooling and reuse
 
 When the request to a `Peer` (upstream server) is finished, the connection to that peer is kept alive and added to a connection pool to be _reused_ by subsequent requests. This happens automatically without any special configuration.

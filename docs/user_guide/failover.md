@@ -1,3 +1,9 @@
+---
+title: "Handling failures and failover"
+description: "Pingora-proxy allows users to define how to handle failures throughout the life of a proxied request."
+updated_at: "2026-07-28"
+---
+
 # Handling failures and failover
 
 Pingora-proxy allows users to define how to handle failures throughout the life of a proxied request.

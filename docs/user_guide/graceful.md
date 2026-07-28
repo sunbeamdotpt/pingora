@@ -1,3 +1,9 @@
+---
+title: "Graceful restart and shutdown"
+description: "Graceful restart, upgrade, and shutdown mechanisms are very commonly used to avoid errors or downtime when releasing new versions of Pingora servers."
+updated_at: "2026-07-28"
+---
+
 # Graceful restart and shutdown
 
 Graceful restart, upgrade, and shutdown mechanisms are very commonly used to avoid errors or downtime when releasing new versions of Pingora servers.

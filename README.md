@@ -1,5 +1,8 @@
 # Pingora
 
+[![Matrix](https://img.shields.io/badge/chat-%23hello%3Asunbeam.pt-0dbd8b?logo=matrix)](https://matrix.to/#/#hello:sunbeam.pt)
+[![License](https://img.shields.io/github/license/sunbeamdotpt/pingora)](LICENSE)
+
 ![Pingora banner image](./docs/assets/pingora_banner.png)
 
 ## What is Pingora

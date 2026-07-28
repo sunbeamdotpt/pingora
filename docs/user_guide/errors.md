@@ -1,3 +1,9 @@
+---
+title: "How to return errors"
+description: "The pingora-error crate exports a custom Result type used throughout other Pingora crates for easy error handling."
+updated_at: "2026-07-28"
+---
+
 # How to return errors
 
 For easy error handling, the `pingora-error` crate exports a custom `Result` type used throughout other Pingora crates.

@@ -1,3 +1,9 @@
+---
+title: "Starting and stopping Pingora server"
+description: "A pingora server is a regular unprivileged multithreaded process."
+updated_at: "2026-07-28"
+---
+
 # Starting and stopping Pingora server
 
 A pingora server is a regular unprivileged multithreaded process.

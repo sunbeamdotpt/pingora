@@ -1,3 +1,9 @@
+---
+title: "Handling panics"
+description: "Any panic that happens to particular requests does not affect other ongoing requests or the server's ability to handle other requests."
+updated_at: "2026-07-28"
+---
+
 # Handling panics
 
 Any panic that happens to particular requests does not affect other ongoing requests or the server's ability to handle other requests. Sockets acquired by the panicking requests are dropped (closed). The panics will be captured by the tokio runtime and then ignored.

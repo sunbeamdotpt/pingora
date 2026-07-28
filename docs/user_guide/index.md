@@ -1,3 +1,9 @@
+---
+title: "User Guide"
+description: "In this guide, we will cover the most used features, operations and settings of Pingora."
+updated_at: "2026-07-28"
+---
+
 # User Guide
 
 In this guide, we will cover the most used features, operations and settings of Pingora.

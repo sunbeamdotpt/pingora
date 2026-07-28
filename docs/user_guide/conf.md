@@ -1,3 +1,9 @@
+---
+title: "Configuration"
+description: "A Pingora configuration file is a list of Pingora settings in yaml format."
+updated_at: "2026-07-28"
+---
+
 # Configuration
 
 A Pingora configuration file is a list of Pingora settings in yaml format.
